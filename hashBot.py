@@ -5,12 +5,19 @@ from credentials import TOKEN   # Bot's token contained in credentials.py (ignor
 # Version Number
 VERSION = "v0.5 - BETA BUILD"
 
-# Printed on help command or on a misused command
-helpBlock = "```---HashBot HELP---" \
+# A list of commands with brief descriptions
+help_block = "```---HashBot HELP---" \
             "\n$hash - Hashes the attached file and sends a message containing the hash. Ex: $hash SHA256" \
             "\n$help - Sends this help message to the channel it was invoked in." \
             "\n$about - Sends a message containing information about this bot to the channel it was invoked in." \
             "```"
+
+# A list of supported hashes
+supported_hashes = "```---List of Supported Hashes---" \
+            "\nMD2, MD4, MD5, SHA1, SHA256" \
+            "```"
+
+about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://github.com/danielkuzmin"
 
 # Message printed to the console when the bot starts
 print(f'HashBot is powering up...')
@@ -29,11 +36,19 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    # Prints the help_block
     if message.content == '$help':
         if message.author == client.user:
             return
-        await message.channel.send(helpBlock)
+        await message.channel.send(help_block)
 
+    # Prints the about_string
+    if message.content == '$about':
+        if message.author == client.user:
+            return
+        await message.channel.send(about_string)
+
+    # $hash command
     if '$hash' in message.content:
         if message.author == client.user:
             return
@@ -41,6 +56,6 @@ async def on_message(message):
         print("$hash Command Invoked!")
         if not message.attachments:
             await message.channel.send("```Error: No file attached to message.```")
-            await message.channel.send(helpBlock)
+            await message.channel.send(help_block)
 
 client.run(TOKEN)
