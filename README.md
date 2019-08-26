@@ -13,7 +13,7 @@ $ sudo apt-get install python3.6
 ```
 After this, create a directory and put all the source files from this repository into it.
 
-To get a user's ID number, go to your Discord settings, click on apperance, and enable developer mode. This whill let you right-click on a user to get their ID.
+To get a user's ID number, go to your Discord settings, click on appearance, and enable developer mode. This will let you right-click on a user to get their ID.
 Setting admin to true will give this user access to various admin commands, such as $echo and $mute. Setting it to false will restrict these commands.
 ### Adding a Token
 Create a file called credentials.py in the same directory as the rest of the source files. Generate a bot token from the Discord Developer Portal. Finally, edit credentials.py and paste the following:

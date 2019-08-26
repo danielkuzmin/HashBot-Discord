@@ -47,6 +47,7 @@ async def on_message(message):
         if message.author == client.user:
             return
         await message.channel.send(about_string)
+        await message.channel.send(supported_hashes)
 
     # $hash command
     if '$hash' in message.content:
