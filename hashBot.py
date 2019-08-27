@@ -60,5 +60,8 @@ async def on_message(message):
         if not message.attachments:
             await message.channel.send("```Error: No file attached to message.```")
             await message.channel.send(help_block)
+            return
+        # For debugging purposes
+        print(message.attachments)
 
 client.run(TOKEN)
