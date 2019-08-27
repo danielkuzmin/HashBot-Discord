@@ -6,16 +6,18 @@ from credentials import TOKEN   # Bot's token contained in credentials.py (ignor
 VERSION = "v0.5 - BETA BUILD"
 
 # A list of commands with brief descriptions
-help_block = "```---HashBot HELP---" \
+help_block = "```" \
+             "---HashBot HELP---" \
             "\n$hash - Hashes the attached file and sends a message containing the hash. Ex: $hash SHA256" \
             "\n$help - Sends this help message to the channel it was invoked in." \
             "\n$about - Sends a message containing information about this bot to the channel it was invoked in." \
             "```"
 
 # A list of supported hashes
-supported_hashes = "```---List of Supported Hashes---" \
-            "\nMD2, MD4, MD5, SHA1, SHA256" \
-            "```"
+supported_hashes = "```" \
+                   "---List of Supported Hashes---\n" \
+                   "MD2, MD4, MD5, SHA1, SHA256" \
+                   "```"
 
 about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://github.com/danielkuzmin"
 
@@ -36,13 +38,13 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    # Prints the help_block
+    # Sends help_block to the channel it was invoked in
     if message.content == '$help':
         if message.author == client.user:
             return
         await message.channel.send(help_block)
 
-    # Prints the about_string
+    # Sends about_string to the channel it was invoked in
     if message.content == '$about':
         if message.author == client.user:
             return
