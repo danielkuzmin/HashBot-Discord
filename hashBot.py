@@ -71,12 +71,13 @@ async def on_message(message):
         if message.author == client.user:
             return
 
-        print("$hash Command Invoked!")
+        print(str(datetime.now()) + " - $hash Command Invoked!")
         if not message.attachments:
             await message.channel.send("```Error: No file attached to message.```")
             await message.channel.send(help_block)
             return
 
+        # Everything below occurs only if a file is attached
         print(message.attachments)
 
 client.run(TOKEN)
