@@ -39,12 +39,23 @@ def create_directories():
         pass
 
 
+# Writes a log entry
+def write_log(a_info, fhash, user):
+    f = open("HASHBOT_FILES\LOGS\logs.txt", "a+")
+    log = f"\n{a_info.id}\n---{datetime.now()}\n---{a_info.filename}\n---{a_info.url}\n---{fhash}\n---UserID : {user}"
+    f.write(log)
+
+
+def delete_file(filename):
+    os.remove(f"HASHBOT_FILES\TEMPFILES\{filename}")
+
+
 # Returns the hash of a file given the filename and hash function name
 def hash_file(filename, hashname):
     if hashname == 'SHA1':
         file = open(f"HASHBOT_FILES\TEMPFILES\{filename}", 'rb')
         sha1 = hashlib.sha1(file.read()).hexdigest()
-        print(sha1)
+        return sha1
 
 
 # Saves the attached file to the temp folder
@@ -121,6 +132,17 @@ async def on_message(message):
         save_to_temp(message.attachments[0].url, message.attachments[0].id, message.attachments[0].filename)
 
         # Hashing the file
-        hash_file(f"{message.attachments[0].id}-{message.attachments[0].filename}", hashname)
+        fhash = hash_file(f"{message.attachments[0].id}-{message.attachments[0].filename}", hashname)
+
+        # Prints the results of the hash and other information
+        await message.channel.send(f"```Filename: {message.attachments[0].filename}```")
+        await message.channel.send(f"```FileID: {message.attachments[0].id}```")
+        await message.channel.send(f"```{hashname} - {fhash}```")
+
+        # Writes information into logs.txt
+        write_log(message.attachments[0], hashname + " : " + fhash, message.author.id)
+
+        # Deletes the file from the temp folder
+        delete_file(f"{message.attachments[0].id}-{message.attachments[0].filename}")
 
 client.run(TOKEN)
