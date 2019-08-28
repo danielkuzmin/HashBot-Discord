@@ -7,7 +7,7 @@ from datetime import datetime   # To print system date and time
 from credentials import TOKEN   # Bot's token contained in credentials.py (ignored by git)
 
 # Version Number
-VERSION = "v0.5 - ALPHA BUILD"
+VERSION = "v0.9 - BETA BUILD"
 
 # A list of commands with brief descriptions
 help_block = "```" \
@@ -22,7 +22,7 @@ supported_hashes = ['SHA1', 'SHA256']
 # A list of supported hashes as a string (to print)
 supported_hashes_s = "```" \
                    "---List of Supported Hashes---\n" \
-                   "MD2, MD4, MD5, SHA1, SHA256" \
+                   "SHA1, SHA256" \
                    "```"
 
 about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://github.com/danielkuzmin"
@@ -52,10 +52,13 @@ def delete_file(filename):
 
 # Returns the hash of a file given the filename and hash function name
 def hash_file(filename, hashname):
+    file = open(f"HASHBOT_FILES\TEMPFILES\{filename}", 'rb')
     if hashname == 'SHA1':
-        file = open(f"HASHBOT_FILES\TEMPFILES\{filename}", 'rb')
         sha1 = hashlib.sha1(file.read()).hexdigest()
         return sha1
+    if hashname == 'SHA256':
+        sha256 = hashlib.sha256(file.read()).hexdigest()
+        return sha256
 
 
 # Saves the attached file to the temp folder
@@ -137,7 +140,7 @@ async def on_message(message):
         # Prints the results of the hash and other information
         await message.channel.send(f"```Filename: {message.attachments[0].filename}```")
         await message.channel.send(f"```FileID: {message.attachments[0].id}```")
-        await message.channel.send(f"```{hashname} - {fhash}```")
+        await message.channel.send(f"```{hashname}: {fhash}```")
 
         # Writes information into logs.txt
         write_log(message.attachments[0], hashname + " : " + fhash, message.author.id)
