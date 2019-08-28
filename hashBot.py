@@ -32,27 +32,27 @@ about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://githu
 def create_directories():
     try:
         # This is where the requested file is stored while it's being hashed
-        os.makedirs(r"HASHBOT_FILES\TEMPFILES")
+        os.makedirs(r"HASHBOT_FILES/TEMPFILES")
         # This is where the logs are
-        os.makedirs(r"HASHBOT_FILES\LOGS")
+        os.makedirs(r"HASHBOT_FILES/LOGS")
     except FileExistsError:
         pass
 
 
 # Writes a log entry
 def write_log(a_info, fhash, user):
-    f = open("HASHBOT_FILES\LOGS\logs.txt", "a+")
+    f = open("HASHBOT_FILES/LOGS/logs.txt", "a+")
     log = f"\n{a_info.id}\n---{datetime.now()}\n---{a_info.filename}\n---{a_info.url}\n---{fhash}\n---UserID : {user}"
     f.write(log)
 
 
 def delete_file(filename):
-    os.remove(f"HASHBOT_FILES\TEMPFILES\{filename}")
+    os.remove(f"HASHBOT_FILES/TEMPFILES/{filename}")
 
 
 # Returns the hash of a file given the filename and hash function name
 def hash_file(filename, hashname):
-    file = open(f"HASHBOT_FILES\TEMPFILES\{filename}", 'rb')
+    file = open(f"HASHBOT_FILES/TEMPFILES/{filename}", 'rb')
     if hashname == 'SHA1':
         sha1 = hashlib.sha1(file.read()).hexdigest()
         return sha1
@@ -64,7 +64,7 @@ def hash_file(filename, hashname):
 # Saves the attached file to the temp folder
 def save_to_temp(url, a_id, filename):
     r = requests.get(url)
-    with open(f"HASHBOT_FILES\TEMPFILES\{a_id}-{filename}", 'wb') as f:
+    with open(f"HASHBOT_FILES/TEMPFILES/{a_id}-{filename}", 'wb') as f:
         f.write(r.content)
 
 
