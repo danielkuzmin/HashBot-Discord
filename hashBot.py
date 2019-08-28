@@ -1,4 +1,6 @@
 import discord                  # Discord.py API
+import requests                 # To download the files
+import os                       # To create the necessary directories
 from datetime import datetime   # To print system date and time
 from credentials import TOKEN   # Bot's token contained in credentials.py (ignored by git)
 
@@ -21,6 +23,15 @@ supported_hashes = "```" \
 
 about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://github.com/danielkuzmin"
 
+
+# Creates the necessary directories if they do not exist
+def create_directories():
+    try:
+        os.makedirs("HASHBOT_FILES\TEMPFILES")
+    except FileExistsError:
+        pass
+
+
 # Message printed to the console when the bot starts
 print(f'HashBot is powering up...')
 print("Current System date and time: ", datetime.now())
@@ -34,6 +45,7 @@ async def on_ready():
     # Creates a list of servers the bot is connected to
     servers = '\n - '.join([guild.name for guild in client.guilds])
     print(f'Servers Connected:\n - {servers}')
+    create_directories()
 
 
 @client.event
@@ -61,7 +73,7 @@ async def on_message(message):
             await message.channel.send("```Error: No file attached to message.```")
             await message.channel.send(help_block)
             return
-        # For debugging purposes
+
         print(message.attachments)
 
 client.run(TOKEN)

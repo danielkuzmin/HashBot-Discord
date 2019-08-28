@@ -27,6 +27,9 @@ In a terminal window, navigate to the directory you put the source files in. Run
 $ nohup python3 hashBot.py&
 ```
 This will start the bot. You can close the terminal window, or the SSH window, and the bot will keep running as long as the machine doesn't shut down or lose connection to the internet.
+### Changing Permissions
+The script will require read, write, and execute permissions.
+Todo: Explain how to do this.
 ## Using the Bot
 This bot uses the prefix '$' and comes with the following commands:
 ### $hash
