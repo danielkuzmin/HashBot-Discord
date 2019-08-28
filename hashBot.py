@@ -27,7 +27,10 @@ about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://githu
 # Creates the necessary directories if they do not exist
 def create_directories():
     try:
-        os.makedirs("HASHBOT_FILES\TEMPFILES")
+        # This is where the requested file is stored while it's being hashed
+        os.makedirs(r"HASHBOT_FILES\TEMPFILES")
+        # This is where the logs are
+        os.makedirs(r"HASHBOT_FILES\LOGS")
     except FileExistsError:
         pass
 
