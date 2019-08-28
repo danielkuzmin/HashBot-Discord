@@ -35,6 +35,13 @@ def create_directories():
         pass
 
 
+# Saves the attached file to the temp folder
+def save_to_temp(url, a_id, filename):
+    r = requests.get(url)
+    with open(f"HASHBOT_FILES\TEMPFILES\{a_id}-{filename}", 'wb') as f:
+        f.write(r.content)
+
+
 # Message printed to the console when the bot starts
 print(f'HashBot is powering up...')
 print("Current System date and time: ", datetime.now())
@@ -78,6 +85,7 @@ async def on_message(message):
             return
 
         # Everything below occurs only if a file is attached
-        print(message.attachments)
+        print(message.attachments[0])
+        save_to_temp(message.attachments[0].url, message.attachments[0].id, message.attachments[0].filename)
 
 client.run(TOKEN)
