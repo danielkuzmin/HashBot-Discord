@@ -40,8 +40,11 @@ def create_directories():
 
 
 # Returns the hash of a file given the filename and hash function name
-#def hash_file(filename, hashname):
-
+def hash_file(filename, hashname):
+    if hashname == 'SHA1':
+        file = open(f"HASHBOT_FILES\TEMPFILES\{filename}", 'rb')
+        sha1 = hashlib.sha1(file.read()).hexdigest()
+        print(sha1)
 
 
 # Saves the attached file to the temp folder
@@ -118,6 +121,6 @@ async def on_message(message):
         save_to_temp(message.attachments[0].url, message.attachments[0].id, message.attachments[0].filename)
 
         # Hashing the file
-        #hash_file(f"{message.attachments[0].id}-{message.attachments[0].filename}", hashname)
+        hash_file(f"{message.attachments[0].id}-{message.attachments[0].filename}", hashname)
 
 client.run(TOKEN)
