@@ -17,12 +17,12 @@ help_block = "```" \
             "\n$about - Sends a message containing information about this bot to the channel it was invoked in." \
             "```"
 
-supported_hashes = ['SHA1', 'SHA256']
+supported_hashes = ['sha1', 'sha256', 'sha512', 'sha3_512', 'md5', 'BLAKE2S']
 
 # A list of supported hashes as a string (to print)
 supported_hashes_s = "```" \
                    "---List of Supported Hashes---\n" \
-                   "SHA1, SHA256" \
+                   "SHA1, SHA256, SHA512, SHA3_512, MD5, BLAKE2S" \
                    "```"
 
 about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://github.com/danielkuzmin"
@@ -53,12 +53,23 @@ def delete_file(filename):
 # Returns the hash of a file given the filename and hash function name
 def hash_file(filename, hashname):
     file = open(f"HASHBOT_FILES/TEMPFILES/{filename}", 'rb')
-    if hashname == 'SHA1':
-        sha1 = hashlib.sha1(file.read()).hexdigest()
-        return sha1
-    if hashname == 'SHA256':
-        sha256 = hashlib.sha256(file.read()).hexdigest()
-        return sha256
+    if hashname.lower() == 'sha1':
+        return hashlib.sha1(file.read()).hexdigest()
+
+    if hashname.lower() == 'sha256':
+        return hashlib.sha256(file.read()).hexdigest()
+
+    if hashname.lower() == 'md5':
+        return hashlib.md5(file.read()).hexdigest()
+
+    if hashname.lower() == 'sha512':
+        return hashlib.sha512(file.read()).hexdigest()
+
+    if hashname.lower() == 'sha3_512':
+        return hashlib.sha3_512(file.read()).hexdigest()
+
+    if hashname.lower() == 'blake2s':
+        return hashlib.blake2s(file.read()).hexdigest()
 
 
 # Saves the attached file to the temp folder
@@ -70,7 +81,7 @@ def save_to_temp(url, a_id, filename):
 
 # Checks if the user entered a valid hash
 def validate_input(hashname):
-    return hashname in supported_hashes
+    return hashname.lower() in supported_hashes
 
 
 # Message printed to the console when the bot starts
