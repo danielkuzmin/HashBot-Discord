@@ -40,3 +40,5 @@ $hash SHA256
 Sends a message containing the bot's command list and a short description with usages of each command to the channel it was invoked in.
 ### $about
 Sends a message containing the author's github and version number.
+### List of Supported Hashes
+SHA1, SHA256, SHA512, SHA3_512, MD5, BLAKE25
