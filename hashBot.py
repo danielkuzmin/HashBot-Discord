@@ -46,6 +46,7 @@ def write_log(a_info, fhash, user):
     f.write(log)
 
 
+# Deletes a file from the /TEMPFILES directory
 def delete_file(filename):
     os.remove(f"HASHBOT_FILES/TEMPFILES/{filename}")
 
@@ -90,7 +91,7 @@ print("Current System date and time: ", datetime.now())
 
 client = discord.Client()
 
-# Message printed to the console when the bot joins discord
+# Executed when the bot joins discord
 @client.event
 async def on_ready():
     # Show: playing "say $help"
@@ -102,7 +103,7 @@ async def on_ready():
     print(f'Servers Connected:\n - {servers}')
     create_directories()
 
-
+# Listens for messages
 @client.event
 async def on_message(message):
     # Sends help_block to the channel it was invoked in
@@ -120,10 +121,12 @@ async def on_message(message):
 
     # $hash command
     if '$hash' in message.content:
+        # To prevent the bot from replying to itself
         if message.author == client.user:
             return
 
         print(str(datetime.now()) + " - $hash Command Invoked!")
+        # If there's no attachments
         if not message.attachments:
             await message.channel.send("```Error: No file attached to message.```")
             await message.channel.send(help_block)
