@@ -17,7 +17,7 @@ help_block = "```" \
             "\n$about - Sends a message containing information about this bot to the channel it was invoked in." \
             "```"
 
-supported_hashes = ['sha1', 'sha256', 'sha512', 'sha3_512', 'md5', 'blake2S']
+supported_hashes = ['sha1', 'sha256', 'sha512', 'sha3_512', 'md5', 'blake2s']
 
 # A list of supported hashes as a string (to print)
 supported_hashes_s = "```" \
