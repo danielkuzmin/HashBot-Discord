@@ -94,8 +94,7 @@ client = discord.Client()
 @client.event
 async def on_ready():
     # Show: playing "say $help"
-    game = discord.Game("say $help")
-    await client.change_presence(status=discord.Status.online, activity=game)
+    await client.change_presence(status=discord.Status.online, activity=discord.Game("say $help"))
 
     print(f'{client.user.name} has connected to Discord!')
     # Creates a list of servers the bot is connected to
