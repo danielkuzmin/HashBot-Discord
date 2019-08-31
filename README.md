@@ -41,4 +41,4 @@ Sends a message containing the bot's command list and a short description with u
 ### $about
 Sends a message containing the author's github and version number.
 ### List of Supported Hashes
-SHA1, SHA256, SHA512, SHA3_512, MD5, BLAKE25
+SHA1, SHA256, SHA512, SHA3_512, MD5, BLAKE25, Whirlpool

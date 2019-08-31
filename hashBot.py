@@ -1,7 +1,8 @@
 import discord                  # Discord.py API
 import requests                 # To download the files
 import os                       # To create the necessary directories
-import hashlib                  # To hash the given file
+
+import hashlib                  # Required for SHA series, MD5, and BLAKE2S
 import whirlpool                # Required for the whirlpool hash
 
 from datetime import datetime   # To print system date and time
