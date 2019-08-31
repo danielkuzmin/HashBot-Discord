@@ -108,6 +108,7 @@ async def on_ready():
 async def on_message(message):
     # Sends help_block to the channel it was invoked in
     if message.content == '$help':
+        # To prevent the bot from replying to itself
         if message.author == client.user:
             return
         await message.channel.send(help_block)
