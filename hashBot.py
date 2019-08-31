@@ -39,7 +39,7 @@ def create_directories():
         pass
 
 
-# Writes a log entry
+# Writes a log entry containing the date and time, attachment ID, URL, name, hash, and user ID
 def write_log(a_info, fhash, user):
     f = open("HASHBOT_FILES/LOGS/logs.txt", "a+")
     log = f"\n{a_info.id}\n---{datetime.now()}\n---{a_info.filename}\n---{a_info.url}\n---{fhash}\n---UserID : {user}"
@@ -73,7 +73,7 @@ def hash_file(filename, hashname):
         return hashlib.blake2s(file.read()).hexdigest()
 
 
-# Saves the attached file to the temp folder
+# Downloads the attached file to the temp folder
 def save_to_temp(url, a_id, filename):
     r = requests.get(url)
     with open(f"HASHBOT_FILES/TEMPFILES/{a_id}-{filename}", 'wb') as f:
