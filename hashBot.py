@@ -2,6 +2,7 @@ import discord                  # Discord.py API
 import requests                 # To download the files
 import os                       # To create the necessary directories
 import hashlib                  # To hash the given file
+import whirlpool                # Required for the whirlpool hash
 
 from datetime import datetime   # To print system date and time
 from credentials import TOKEN   # Bot's token contained in credentials.py (ignored by git)
@@ -17,12 +18,12 @@ help_block = "```" \
             "\n$about - Sends a message containing information about this bot to the channel it was invoked in." \
             "```"
 
-supported_hashes = ['sha1', 'sha256', 'sha512', 'sha3_512', 'md5', 'blake2s']
+supported_hashes = ['sha1', 'sha256', 'sha512', 'sha3_512', 'md5', 'blake2s', 'whirlpool']
 
 # A list of supported hashes as a string (to print)
 supported_hashes_s = "```" \
                    "---List of Supported Hashes---\n" \
-                   "SHA1, SHA256, SHA512, SHA3_512, MD5, BLAKE2S" \
+                   "SHA1, SHA256, SHA512, SHA3_512, MD5, BLAKE2S, Whirlpool" \
                    "```"
 
 about_string = "Version: " + VERSION + "\nBuilt by Daniel Kuzmin \nhttps://github.com/danielkuzmin"
@@ -71,6 +72,9 @@ def hash_file(filename, hashname):
 
     if hashname.lower() == 'blake2s':
         return hashlib.blake2s(file.read()).hexdigest()
+
+    if hashname.lower() == 'whirlpool':
+        return whirlpool.new(file.read()).hexdigest()
 
 
 # Downloads the attached file to the temp folder
