@@ -9,7 +9,7 @@ from datetime import datetime   # To print system date and time
 from credentials import TOKEN   # Bot's token contained in credentials.py (ignored by git)
 
 # Version Number
-VERSION = "v0.9 - BETA BUILD"
+VERSION = "v1.0 - RELEASE"
 
 # A list of commands with brief descriptions
 help_block = "```" \
