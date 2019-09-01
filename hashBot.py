@@ -99,11 +99,11 @@ client = discord.Client()
 # Executed when the bot joins discord
 @client.event
 async def on_ready():
-    # Show: playing "say $help"
+    # To show: playing "say $help"
     await client.change_presence(status=discord.Status.online, activity=discord.Game("say $help"))
 
     print(f'{client.user.name} has connected to Discord!')
-    # Creates a list of servers the bot is connected to
+    # Creates a list of servers the bot is connected to and prints it
     servers = '\n - '.join([guild.name for guild in client.guilds])
     print(f'Servers Connected:\n - {servers}')
     create_directories()
