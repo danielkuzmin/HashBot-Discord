@@ -1,4 +1,4 @@
-# HashBot
+# HashBot - Discord
 This bot returns the hash of a given file via Discord. List of hashes supported below. Written in Python.
 ## Getting Started
 If you'd like to host the bot yourself, these instructions will show you how to get it running on a Linux machine in the background.
