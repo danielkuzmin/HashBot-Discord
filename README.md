@@ -7,9 +7,13 @@ You will need a machine running Linux, preferably something that can be used as 
 ```
 $ python3 --version
 ```
-If this does not come back with a version number, you will have to install it yourself. Run the following command:
+If this does not come back with a version number, you will have to install it yourself. Run the following command (if on a Debian-based platform):
 ```
 $ sudo apt-get install python3.6
+```
+If you are using RHEL or CentOS, use this command instead:
+```
+$ sudo yum install rh-python36
 ```
 After this, create a directory and put all the source files from this repository into it.
 
