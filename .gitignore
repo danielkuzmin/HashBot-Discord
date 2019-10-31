@@ -1,6 +1,7 @@
 # Mine
 credentials.py
 HASHBOT_FILES
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
